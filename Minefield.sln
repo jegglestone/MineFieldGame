@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Minefield", "Minefield\Minefield.csproj", "{70EAD4B2-A1B8-4247-853C-3ED4627C134E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MineField.UnitTests", "MineField.UnitTests\MineField.UnitTests.csproj", "{20D43CAE-B6A6-4DB3-921E-5A5C968F0548}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{70EAD4B2-A1B8-4247-853C-3ED4627C134E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70EAD4B2-A1B8-4247-853C-3ED4627C134E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70EAD4B2-A1B8-4247-853C-3ED4627C134E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20D43CAE-B6A6-4DB3-921E-5A5C968F0548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20D43CAE-B6A6-4DB3-921E-5A5C968F0548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20D43CAE-B6A6-4DB3-921E-5A5C968F0548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20D43CAE-B6A6-4DB3-921E-5A5C968F0548}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

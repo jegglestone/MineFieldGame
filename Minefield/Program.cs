@@ -7,7 +7,7 @@ namespace MinesweeperGame
         private static ServiceProvider CreateServices()
         {
             var serviceProvider = new ServiceCollection()
-                .AddSingleton<Application>(new Application())
+                .AddSingleton(new Application())
                 .BuildServiceProvider();
 
             return serviceProvider;
@@ -20,10 +20,5 @@ namespace MinesweeperGame
             var app = services.GetRequiredService<Application>();
             app.PlayGame();              
         }  
-    }
-
-    public class Application
-    {
- 
     }
 }
