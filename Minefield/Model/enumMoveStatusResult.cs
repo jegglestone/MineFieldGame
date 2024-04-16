@@ -4,5 +4,6 @@
     SteppedInMine,
     SteppedOutOfBoundsAttempt,
     ReachedTheOtherSideWinCondition,
-    GameOverNoLivesLeft
+    GameOverNoLivesLeft,
+    InvalidInput
 }

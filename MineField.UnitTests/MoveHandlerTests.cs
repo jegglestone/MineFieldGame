@@ -94,6 +94,24 @@ namespace MineField.UnitTests
             result.Should().Be(EnumMoveStatusResult.GameOverNoLivesLeft);
         }
 
+        [Fact]
+        public void When_InvalidInput_ReturnsInvalidInputAttempt()
+        {
+            var player = new Player
+            {
+                Lives = 1,
+                PlayerCol = 1,
+                PlayerRow = 1
+            };
 
+            var mines = new List<MineCoordinate>
+            {
+                new MineCoordinate(row: 2, col: 1)
+            };
+
+            var result = _moveHandler.HandleMove(player, mines, "sideways");
+
+            result.Should().Be(EnumMoveStatusResult.InvalidInput);
+        }
     }
 }

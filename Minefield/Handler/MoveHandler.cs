@@ -6,10 +6,9 @@ namespace Minefield.Handler
     public class MoveHandler : IMoveHandler
     {
         public EnumMoveStatusResult HandleMove(
-            Player player, List<MineCoordinate> mines, string input)
+            Player player, List<MineCoordinate> mines, string? input)
         {
-            var enumMoveStatusResult = new EnumMoveStatusResult();
-
+            var enumMoveStatusResult = EnumMoveStatusResult.SuccessfulMove;
             switch (input)
             {
                 case "up":
@@ -25,7 +24,7 @@ namespace Minefield.Handler
                     if (player.PlayerCol < ApplicationConstants.BoardSize - 1) player.PlayerCol++;
                     break;
                 default:
-                    enumMoveStatusResult = EnumMoveStatusResult.SteppedOutOfBoundsAttempt;
+                    enumMoveStatusResult = EnumMoveStatusResult.InvalidInput;
                     break;
             }
 

@@ -25,43 +25,34 @@ namespace MinesweeperGame
             {
                 Console.Clear();
 
-                DisplayMoveMessages(enumMoveStatusResult);
+                string message = GetMoveMessage(enumMoveStatusResult);
+                Console.WriteLine(message);
+                Console.ReadKey();
 
-                // Testing purpose - display option
                 DisplayBoard(board, player, mines);
 
-                //display moves, lives
                 Console.WriteLine($"Lives: {player.Lives}");
                 Console.WriteLine($"Moves: {player.Moves}");
                 Console.WriteLine(player.GetPosition());
                 Console.Write("Enter direction (up/down/left/right): ");
 
-                string input = Console.ReadLine().ToLower();
+                string? input = Console.ReadLine()?.ToLower();
                 enumMoveStatusResult = _moveHandler.HandleMove(player, mines, input);
             }
         }
 
-        private static void DisplayMoveMessages(EnumMoveStatusResult enumMoveStatusResult)
+        private static string GetMoveMessage(EnumMoveStatusResult enumMoveStatusResult)
         {
-            switch (enumMoveStatusResult)
+            return enumMoveStatusResult switch
             {
-                case EnumMoveStatusResult.SteppedOutOfBoundsAttempt:
-                    Console.WriteLine("Invalid input. Use 'up', 'down', 'left', or 'right'.");
-                    Console.ReadKey();
-                    break;
-                case EnumMoveStatusResult.SteppedInMine:
-                    Console.WriteLine("Oops! You stepped on a mine!");
-                    Console.ReadKey();
-                    break;
-                case EnumMoveStatusResult.GameOverNoLivesLeft:
-                    Console.WriteLine("Oops! You're dead!");
-                    Console.ReadKey();
-                    break;
-                case EnumMoveStatusResult.ReachedTheOtherSideWinCondition:
-                    Console.WriteLine("Congratulations! You have won");
-                    Console.ReadKey();
-                    break;
-            }
+                EnumMoveStatusResult.InvalidInput => "Invalid input. Use 'up', 'down', 'left', or 'right'.",
+                EnumMoveStatusResult.SteppedOutOfBoundsAttempt => "Can't more there!",
+                EnumMoveStatusResult.SteppedInMine => "Oops! You stepped on a mine!",
+                EnumMoveStatusResult.SuccessfulMove => "Moved successfully",
+                EnumMoveStatusResult.GameOverNoLivesLeft => "Oops! You're dead!",
+                EnumMoveStatusResult.ReachedTheOtherSideWinCondition => "Congratulations! You have won",
+                _ => "Moved successfully",
+            };
         }
 
         private static List<MineCoordinate> CreateMines()
@@ -81,30 +72,15 @@ namespace MinesweeperGame
 
         static void DisplayBoard(char[,] board, Player player, List<MineCoordinate> mineCoordinates)
         {
-            // Initialize the board with alternate squares
-            for (int row = 0; row < ApplicationConstants.BoardSize; row++)
-            {
-                for (int col = 0; col < ApplicationConstants.BoardSize; col++)
-                {
-                    board[row, col] = (row + col) % 2 == 0 ? 'x' : 'o';
+            InitialiseBoardWithAlternativeSquares(board, player);
 
-                    if (row == player.PlayerRow && col == player.PlayerCol)
-                        board[row, col] = 'P';
-                }
-            }
+            AddMines(board, player, mineCoordinates);
 
-            // Add mines
-            foreach (var mineCoordinate in mineCoordinates)
-            {
-                if (IsValidPosition(mineCoordinate.Row, mineCoordinate.Column))
-                {
-                    if (player.PlayerRow != mineCoordinate.Row || player.PlayerCol != mineCoordinate.Column)
-                        board[mineCoordinate.Row, mineCoordinate.Column] = 'M';
-                    else board[mineCoordinate.Row, mineCoordinate.Column] = 'P'; // Player is in the mine
-                }
-            }
+            DisplayChessBoard(board);
+        }
 
-            // Display the chessboard
+        private static void DisplayChessBoard(char[,] board)
+        {
             Console.WriteLine("   A B C D E F G H"); // Letters along the bottom
             for (int row = 0; row < ApplicationConstants.BoardSize; row++)
             {
@@ -114,6 +90,33 @@ namespace MinesweeperGame
                     Console.Write($"{board[row, col]} ");
                 }
                 Console.WriteLine();
+            }
+        }
+
+        private static void AddMines(char[,] board, Player player, List<MineCoordinate> mineCoordinates)
+        {
+            foreach (var mineCoordinate in mineCoordinates)
+            {
+                if (IsValidPosition(mineCoordinate.Row, mineCoordinate.Column))
+                {
+                    if (player.PlayerRow != mineCoordinate.Row || player.PlayerCol != mineCoordinate.Column)
+                        board[mineCoordinate.Row, mineCoordinate.Column] = 'M';
+                    else board[mineCoordinate.Row, mineCoordinate.Column] = 'P'; // Player is in the mine
+                }
+            }
+        }
+
+        private static void InitialiseBoardWithAlternativeSquares(char[,] board, Player player)
+        {
+            for (int row = 0; row < ApplicationConstants.BoardSize; row++)
+            {
+                for (int col = 0; col < ApplicationConstants.BoardSize; col++)
+                {
+                    board[row, col] = (row + col) % 2 == 0 ? 'x' : 'o';
+
+                    if (row == player.PlayerRow && col == player.PlayerCol)
+                        board[row, col] = 'P';
+                }
             }
         }
 

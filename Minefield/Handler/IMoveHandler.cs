@@ -5,6 +5,6 @@ namespace Minefield.Handler
     public interface IMoveHandler
     {
         public EnumMoveStatusResult HandleMove(
-            Player player, List<MineCoordinate> mines, string input);
+            Player player, List<MineCoordinate> mines, string? input);
     }
 }
