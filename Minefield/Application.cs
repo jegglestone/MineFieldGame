@@ -5,8 +5,6 @@ namespace MinesweeperGame
 {
     public class Application
     {
-        const int NumberOfMines = 6;
-
         private readonly IMoveHandler _moveHandler;
 
         public Application()
@@ -59,7 +57,7 @@ namespace MinesweeperGame
         {
             Random random = new();
             List<MineCoordinate> minesCoords = new();
-            for (int i = 0; i < NumberOfMines; i++)
+            for (int i = 0; i < ApplicationConstants.NumberOfMines; i++)
             {
                 int mineRow = random.Next(ApplicationConstants.BoardSize);
                 int mineCol = random.Next(ApplicationConstants.BoardSize);
