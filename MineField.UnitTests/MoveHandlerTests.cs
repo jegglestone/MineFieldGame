@@ -150,5 +150,43 @@ namespace MineField.UnitTests
 
             result.Should().Be(EnumMoveStatusResult.SteppedOutOfBoundsAttempt);
         }
+
+        [Fact]
+        public void When_MovingOutsideUpperBounds_ReturnsSteppedOutOfBoundsAttempt()
+        {
+            var player = new Player
+            {
+                Lives = 1,
+                PlayerCol = 7,
+                PlayerRow = 0
+            };
+
+            var mines = new List<MineCoordinate>
+            {
+            };
+
+            var result = _moveHandler.HandleMove(player, mines, "up");
+
+            result.Should().Be(EnumMoveStatusResult.SteppedOutOfBoundsAttempt);
+        }
+
+        [Fact]
+        public void When_MovingOutsideLowerBounds_ReturnsVictory()
+        {
+            var player = new Player
+            {
+                Lives = 1,
+                PlayerCol = 0,
+                PlayerRow = 7
+            };
+
+            var mines = new List<MineCoordinate>
+            {
+            };
+
+            var result = _moveHandler.HandleMove(player, mines, "down");
+
+            result.Should().Be(EnumMoveStatusResult.ReachedTheOtherSideWinCondition);
+        }
     }
 }

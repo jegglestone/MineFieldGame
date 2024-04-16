@@ -9,13 +9,16 @@ namespace Minefield.Handler
             Player player, List<MineCoordinate> mines, string? input)
         {
             var enumMoveStatusResult = EnumMoveStatusResult.SuccessfulMove;
+
             switch (input)
             {
                 case "up":
                     if (player.PlayerRow > 0) player.PlayerRow--;
+                    else enumMoveStatusResult = EnumMoveStatusResult.SteppedOutOfBoundsAttempt;
                     break;
                 case "down":
                     if (player.PlayerRow < ApplicationConstants.BoardSize - 1) player.PlayerRow++;
+                    else enumMoveStatusResult = EnumMoveStatusResult.ReachedTheOtherSideWinCondition;
                     break;
                 case "left":
                     if (player.PlayerCol > 0) player.PlayerCol--;
@@ -30,7 +33,19 @@ namespace Minefield.Handler
                     break;
             }
 
-            // Check for mines and update lives/moves
+            enumMoveStatusResult = HandleMines(player, mines, enumMoveStatusResult);
+
+            if (player.Lives == 0)
+            {
+                enumMoveStatusResult = EnumMoveStatusResult.GameOverNoLivesLeft;
+            }
+
+            player.Moves++;
+            return enumMoveStatusResult;
+        }
+
+        private static EnumMoveStatusResult HandleMines(Player player, List<MineCoordinate> mines, EnumMoveStatusResult enumMoveStatusResult)
+        {
             foreach (var mine in mines)
             {
                 if (mine.Row == player.PlayerRow && mine.Column == player.PlayerCol)
@@ -41,19 +56,6 @@ namespace Minefield.Handler
                 }
             }
 
-            // Check if player reached the other side (win condition)
-            if (player.PlayerRow == ApplicationConstants.BoardSize - 1)
-            {
-                return EnumMoveStatusResult.ReachedTheOtherSideWinCondition;
-            }
-
-            // Handle game over (no lives left)
-            if (player.Lives == 0)
-            {
-                return EnumMoveStatusResult.GameOverNoLivesLeft;
-            }
-
-            player.Moves++;
             return enumMoveStatusResult;
         }
     }
