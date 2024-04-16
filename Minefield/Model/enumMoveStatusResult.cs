@@ -1,9 +1,13 @@
-﻿public enum EnumMoveStatusResult
+﻿namespace Minefield.Model
 {
-    SuccessfulMove = 0,
-    SteppedInMine,
-    SteppedOutOfBoundsAttempt,
-    ReachedTheOtherSideWinCondition,
-    GameOverNoLivesLeft,
-    InvalidInput
+    public enum EnumMoveStatusResult
+    {
+        InitialMove,
+        SuccessfulMove,
+        SteppedInMine,
+        SteppedOutOfBoundsAttempt,
+        ReachedTheOtherSideWinCondition,
+        GameOverNoLivesLeft,
+        InvalidInput
+    }
 }

@@ -25,9 +25,7 @@ namespace MineField.UnitTests
                 Moves = 0,
             };
 
-            var mines = new List<MineCoordinate>
-            {
-            };
+            var mines = new List<MineCoordinate>();
 
             _moveHandler.HandleMove(player, mines, move);
 
@@ -65,9 +63,7 @@ namespace MineField.UnitTests
                 PlayerRow = 7
             };
 
-            var mines = new List<MineCoordinate>
-            {
-            };
+            var mines = new List<MineCoordinate>();
 
             var result = _moveHandler.HandleMove(player, mines, "down");
 
@@ -104,9 +100,7 @@ namespace MineField.UnitTests
                 PlayerRow = 1
             };
 
-            var mines = new List<MineCoordinate>
-            {
-            };
+            var mines = new List<MineCoordinate>();
 
             var result = _moveHandler.HandleMove(player, mines, "sideways");
 
@@ -123,9 +117,7 @@ namespace MineField.UnitTests
                 PlayerRow = 0
             };
 
-            var mines = new List<MineCoordinate>
-            {
-            };
+            var mines = new List<MineCoordinate>();
 
             var result = _moveHandler.HandleMove(player, mines, "left");
 
@@ -142,9 +134,7 @@ namespace MineField.UnitTests
                 PlayerRow = 0
             };
 
-            var mines = new List<MineCoordinate>
-            {
-            };
+            var mines = new List<MineCoordinate>();
 
             var result = _moveHandler.HandleMove(player, mines, "right");
 
@@ -161,9 +151,7 @@ namespace MineField.UnitTests
                 PlayerRow = 0
             };
 
-            var mines = new List<MineCoordinate>
-            {
-            };
+            var mines = new List<MineCoordinate>();
 
             var result = _moveHandler.HandleMove(player, mines, "up");
 
@@ -180,9 +168,7 @@ namespace MineField.UnitTests
                 PlayerRow = 7
             };
 
-            var mines = new List<MineCoordinate>
-            {
-            };
+            var mines = new List<MineCoordinate>();
 
             var result = _moveHandler.HandleMove(player, mines, "down");
 

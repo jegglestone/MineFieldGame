@@ -19,7 +19,7 @@ namespace MinesweeperGame
             char[,] board = new char[ApplicationConstants.BoardSize, ApplicationConstants.BoardSize];
             var player = new Player();
             var mines = CreateMines();
-            var enumMoveStatusResult = EnumMoveStatusResult.SuccessfulMove;
+            var enumMoveStatusResult = EnumMoveStatusResult.InitialMove;
 
             while (true)
             {
@@ -27,7 +27,6 @@ namespace MinesweeperGame
 
                 string message = GetMoveMessage(enumMoveStatusResult);
                 Console.WriteLine(message);
-                Console.ReadKey();
 
                 DisplayBoard(board, player, mines);
 
@@ -46,6 +45,7 @@ namespace MinesweeperGame
             return enumMoveStatusResult switch
             {
                 EnumMoveStatusResult.InvalidInput => "Invalid input. Use 'up', 'down', 'left', or 'right'.",
+                EnumMoveStatusResult.InitialMove => "Make your move!",
                 EnumMoveStatusResult.SteppedOutOfBoundsAttempt => "Can't more there!",
                 EnumMoveStatusResult.SteppedInMine => "Oops! You stepped on a mine!",
                 EnumMoveStatusResult.SuccessfulMove => "Moved successfully",
