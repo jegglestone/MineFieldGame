@@ -19,9 +19,11 @@ namespace Minefield.Handler
                     break;
                 case "left":
                     if (player.PlayerCol > 0) player.PlayerCol--;
+                    else enumMoveStatusResult = EnumMoveStatusResult.SteppedOutOfBoundsAttempt;
                     break;
                 case "right":
                     if (player.PlayerCol < ApplicationConstants.BoardSize - 1) player.PlayerCol++;
+                    else enumMoveStatusResult = EnumMoveStatusResult.SteppedOutOfBoundsAttempt;
                     break;
                 default:
                     enumMoveStatusResult = EnumMoveStatusResult.InvalidInput;

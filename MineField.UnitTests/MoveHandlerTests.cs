@@ -22,7 +22,7 @@ namespace MineField.UnitTests
         {
             var player = new Player
             {
-                Moves = 0
+                Moves = 0,
             };
 
             var mines = new List<MineCoordinate>
@@ -106,12 +106,49 @@ namespace MineField.UnitTests
 
             var mines = new List<MineCoordinate>
             {
-                new MineCoordinate(row: 2, col: 1)
             };
 
             var result = _moveHandler.HandleMove(player, mines, "sideways");
 
             result.Should().Be(EnumMoveStatusResult.InvalidInput);
+        }
+
+        [Fact]
+        public void When_MovingOutsideLeftBounds_ReturnsSteppedOutOfBoundsAttempt()
+        {
+            var player = new Player
+            {
+                Lives = 1,
+                PlayerCol = 0,
+                PlayerRow = 0
+            };
+
+            var mines = new List<MineCoordinate>
+            {
+            };
+
+            var result = _moveHandler.HandleMove(player, mines, "left");
+
+            result.Should().Be(EnumMoveStatusResult.SteppedOutOfBoundsAttempt);
+        }
+
+        [Fact]
+        public void When_MovingOutsideRightBounds_ReturnsSteppedOutOfBoundsAttempt()
+        {
+            var player = new Player
+            {
+                Lives = 1,
+                PlayerCol = 7,
+                PlayerRow = 0
+            };
+
+            var mines = new List<MineCoordinate>
+            {
+            };
+
+            var result = _moveHandler.HandleMove(player, mines, "right");
+
+            result.Should().Be(EnumMoveStatusResult.SteppedOutOfBoundsAttempt);
         }
     }
 }
